@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["es6"],
+    "allowJs": true,
+    "jsx": "react-native",
+    "noEmit": true,
+    "isolatedModules": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "assets": ["./src/assets"],
+      "navigations": ["./src/navigations"],
+      "components": ["./src/components"],
+      "screens": ["./src/screens"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "./src/**/*",
+    "./App.tsx",
+    "./babel.config.js",
+    "./index.js",
+    "metro.config.js",
+    "./.eslintrc.js"
+  ],
+  "exclude": ["node_modules", "__tests__"]
+}
