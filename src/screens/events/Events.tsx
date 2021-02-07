@@ -31,7 +31,10 @@ export default ({ navigation }: TEventsScreen) => {
           color: '#fff',
           onPress: () => navigation.openDrawer(),
         }}
-        centerComponent={{ text: 'Events', style: { color: '#fff' } }}
+        centerComponent={{
+          text: 'Events',
+          style: { color: '#fff', fontSize: 16 },
+        }}
         rightComponent={{
           icon: 'add',
           color: '#fff',

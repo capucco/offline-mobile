@@ -1,42 +1,36 @@
-import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text } from 'react-native';
+import React, { useCallback } from 'react';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Image, ListItem } from 'react-native-elements';
+import { Icon, ListItem, Text } from 'react-native-elements';
+
+import Image from 'components/Image';
+import { IPlace } from 'services/events/events';
+
+import styles from './styles';
 
 type TEventListItem = {
   image: string;
   title: string;
+  place: IPlace;
 };
 
-const styles = StyleSheet.create({
-  image: {
-    width: 50,
-    height: 50,
-    resizeMode: 'cover',
-  },
-});
-
-export default ({ image, title }: TEventListItem) => {
+export default ({ image, title, place }: TEventListItem) => {
   const navigation = useNavigation();
-  const [imageSrc, setImageSrc] = useState({ uri: image });
 
   const handleItemPress = useCallback(() => {
     navigation.navigate('Event');
   }, [navigation]);
 
-  const handleImageError = useCallback(() => {
-    setImageSrc(require('assets/no-image.png'));
-  }, []);
-
   return (
-    <ListItem onPress={handleItemPress}>
-      <Image
-        source={imageSrc}
-        style={styles.image}
-        onError={handleImageError}
-        PlaceholderContent={<ActivityIndicator />}
-      />
-      <Text>{title}</Text>
+    <ListItem onPress={handleItemPress} containerStyle={styles.container}>
+      <Image src={image} style={styles.image} />
+      <ListItem.Content style={styles.info}>
+        <ListItem.Title style={styles.title}>{title}</ListItem.Title>
+        <View style={styles.place}>
+          <Icon name="place" color="#989eb1" />
+          <Text style={styles.placeText}>{place.name}</Text>
+        </View>
+      </ListItem.Content>
     </ListItem>
   );
 };
