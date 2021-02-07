@@ -1,18 +1,66 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useCallback } from 'react';
+import { Formik } from 'formik';
+import { View } from 'react-native';
+import { Header, Input, Button } from 'react-native-elements';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+import { RootNavigatorParamList } from 'navigations/RootNavigator';
 
-export default () => {
+import styles from './styles';
+
+type TCreateScreenNavigation = DrawerNavigationProp<
+  RootNavigatorParamList,
+  'Create'
+>;
+
+type TCreateScreen = {
+  navigation: TCreateScreenNavigation;
+};
+
+export default ({ navigation }: TCreateScreen) => {
+  const handleFormSubmit = useCallback(() => {
+    // TODO: use service to send data
+    navigation.navigate('Event');
+  }, [navigation]);
+
   return (
-    <View style={styles.root}>
-      <Text>Create</Text>
-    </View>
+    <>
+      <Header
+        leftComponent={{
+          icon: 'menu',
+          color: '#fff',
+          onPress: () => navigation.openDrawer(),
+        }}
+        centerComponent={{
+          text: 'Create new event',
+          style: { color: '#fff', fontSize: 17 },
+        }}
+      />
+      <Formik
+        initialValues={{ title: '', description: '' }}
+        onSubmit={handleFormSubmit}>
+        {({ values, handleChange, handleBlur, handleSubmit }) => (
+          <View style={styles.container}>
+            <Input
+              label="Name"
+              onChange={handleChange('title')}
+              onBlur={handleBlur('title')}
+              value={values.title}
+            />
+            <Input
+              label="Description"
+              onChange={handleChange('description')}
+              onBlur={handleBlur('description')}
+              value={values.description}
+            />
+            <Button
+              title="Create"
+              buttonStyle={styles.submit}
+              onPress={handleSubmit}
+            />
+          </View>
+        )}
+      </Formik>
+    </>
   );
 };
