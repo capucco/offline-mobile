@@ -1,24 +1,24 @@
 import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import CreateScreen from 'screens/create';
 import EventScreen from 'screens/event';
 import EventsScreen from 'screens/events';
 
-export type RootStackParamList = {
+export type RootNavigatorParamList = {
   Create: undefined;
   Event: undefined;
   Events: undefined;
 };
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Drawer = createDrawerNavigator<RootNavigatorParamList>();
 
 const RootNavigator = () => (
-  <Stack.Navigator initialRouteName="Events">
-    <Stack.Screen name="Create" component={CreateScreen} />
-    <Stack.Screen name="Event" component={EventScreen} />
-    <Stack.Screen name="Events" component={EventsScreen} />
-  </Stack.Navigator>
+  <Drawer.Navigator initialRouteName="Events">
+    <Drawer.Screen name="Create" component={CreateScreen} />
+    <Drawer.Screen name="Event" component={EventScreen} />
+    <Drawer.Screen name="Events" component={EventsScreen} />
+  </Drawer.Navigator>
 );
 
 export default RootNavigator;

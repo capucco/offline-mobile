@@ -12,6 +12,8 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 0,
+    'react/jsx-props-no-spreading': 0,
+    'global-require': 0,
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'import'],

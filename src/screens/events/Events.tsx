@@ -1,43 +1,48 @@
-import React, { useLayoutEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { Header } from 'react-native-elements';
 
-import { RootStackParamList } from 'navigations/RootNavigator';
+import { RootNavigatorParamList } from 'navigations/RootNavigator';
+import EventListItem from 'components/EventListItem';
+import { MOCK_EVENTS_DATA } from 'services/events/events';
 
-type EventsScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
+type TEventsScreenNavigation = DrawerNavigationProp<
+  RootNavigatorParamList,
   'Events'
 >;
 
-type TEventsScreenProps = {
-  navigation: EventsScreenNavigationProp;
+type TEventsScreen = {
+  navigation: TEventsScreenNavigation;
 };
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
-export default ({ navigation }: TEventsScreenProps) => {
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Button
-          onPress={() => navigation.navigate('Create')}
-          icon={<Icon name="arrow-right" size={15} color="white" />}
-        />
-      ),
-    });
-  }, [navigation]);
-
+export default ({ navigation }: TEventsScreen) => {
   return (
-    <View style={styles.root}>
-      <Text>Events list</Text>
-    </View>
+    <>
+      <Header
+        leftComponent={{
+          icon: 'menu',
+          color: '#fff',
+          onPress: () => navigation.openDrawer(),
+        }}
+        centerComponent={{ text: 'Events', style: { color: '#fff' } }}
+        rightComponent={{
+          icon: 'add',
+          color: '#fff',
+          onPress: () => navigation.navigate('Create'),
+        }}
+      />
+      <View style={styles.root}>
+        {MOCK_EVENTS_DATA.map((event) => (
+          <EventListItem key={event.id} {...event} />
+        ))}
+      </View>
+    </>
   );
 };
