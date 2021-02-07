@@ -1,6 +1,8 @@
 import React, { useLayoutEffect } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { RootStackParamList } from 'navigations/RootNavigator';
 
@@ -25,7 +27,10 @@ export default ({ navigation }: TEventsScreenProps) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Button title="Create" onPress={() => navigation.navigate('Create')} />
+        <Button
+          onPress={() => navigation.navigate('Create')}
+          icon={<Icon name="arrow-right" size={15} color="white" />}
+        />
       ),
     });
   }, [navigation]);
