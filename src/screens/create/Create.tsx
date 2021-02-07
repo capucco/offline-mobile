@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
 import { Formik } from 'formik';
 import { View } from 'react-native';
-import { Header, Input, Button } from 'react-native-elements';
+import { Header, Input, Button, CheckBox } from 'react-native-elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 import { RootNavigatorParamList } from 'navigations/RootNavigator';
+import Calendar from 'components/Calendar';
 
 import styles from './styles';
 
@@ -37,9 +38,15 @@ export default ({ navigation }: TCreateScreen) => {
         }}
       />
       <Formik
-        initialValues={{ title: '', description: '' }}
+        initialValues={{ title: '', description: '', private: false }}
         onSubmit={handleFormSubmit}>
-        {({ values, handleChange, handleBlur, handleSubmit }) => (
+        {({
+          values,
+          handleChange,
+          setFieldValue,
+          handleBlur,
+          handleSubmit,
+        }) => (
           <View style={styles.container}>
             <Input
               label="Name"
@@ -52,6 +59,15 @@ export default ({ navigation }: TCreateScreen) => {
               onChange={handleChange('description')}
               onBlur={handleBlur('description')}
               value={values.description}
+            />
+            <Calendar />
+            <CheckBox
+              title="Private"
+              size={30}
+              containerStyle={styles.checkbox}
+              textStyle={styles.checkboxText}
+              checked={values.private}
+              onPress={() => setFieldValue('private', !values.private)}
             />
             <Button
               title="Create"
