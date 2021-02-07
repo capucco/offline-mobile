@@ -7,6 +7,7 @@ export interface IEvent {
   title: string;
   place: IPlace;
   image: string;
+  date: string;
 }
 
 // TODO: use request instead of mock data
@@ -18,6 +19,7 @@ export const MOCK_EVENTS_DATA: IEvent[] = [
     place: {
       name: 'Florida, Miami',
     },
+    date: '07/07/2021 01:00:00',
   },
   {
     id: '2',
@@ -26,6 +28,7 @@ export const MOCK_EVENTS_DATA: IEvent[] = [
     place: {
       name: 'Florida, Miami',
     },
+    date: '08/07/2021 01:00:00',
   },
   {
     id: '3',
@@ -34,6 +37,7 @@ export const MOCK_EVENTS_DATA: IEvent[] = [
     place: {
       name: 'Florida, Miami',
     },
+    date: '',
   },
   {
     id: '4',
@@ -42,5 +46,6 @@ export const MOCK_EVENTS_DATA: IEvent[] = [
     place: {
       name: 'Florida, Miami',
     },
+    date: '',
   },
 ];

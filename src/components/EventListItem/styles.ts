@@ -23,6 +23,12 @@ export default StyleSheet.create({
     marginTop: 5,
   },
   placeText: {
+    fontSize: 16,
+    color: '#989eb1',
+  },
+  date: {
+    marginTop: 25,
+    fontSize: 16,
     color: '#989eb1',
   },
 });
