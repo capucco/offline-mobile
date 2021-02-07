@@ -1,5 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+import { RootStackParamList } from 'navigations/RootNavigator';
+
+type EventsScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Events'
+>;
+
+type TEventsScreenProps = {
+  navigation: EventsScreenNavigationProp;
+};
 
 const styles = StyleSheet.create({
   root: {
@@ -9,10 +21,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+export default ({ navigation }: TEventsScreenProps) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button title="Create" onPress={() => navigation.navigate('Create')} />
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.root}>
-      <Text>Events</Text>
+      <Text>Events list</Text>
     </View>
   );
 };

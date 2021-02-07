@@ -10,7 +10,9 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-  rules: {},
+  rules: {
+    'react/prop-types': 0,
+  },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'import'],
   settings: {

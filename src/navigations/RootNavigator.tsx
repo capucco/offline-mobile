@@ -4,32 +4,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CreateScreen from 'screens/create';
 import EventScreen from 'screens/event';
 import EventsScreen from 'screens/events';
-import HomeScreen from 'screens/home';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Create: undefined;
+  Event: undefined;
+  Events: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Create"
-      component={CreateScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Event"
-      component={EventScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Events"
-      component={EventsScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Home"
-      component={HomeScreen}
-      options={{ headerShown: false }}
-    />
+  <Stack.Navigator initialRouteName="Events">
+    <Stack.Screen name="Create" component={CreateScreen} />
+    <Stack.Screen name="Event" component={EventScreen} />
+    <Stack.Screen name="Events" component={EventsScreen} />
   </Stack.Navigator>
 );
 
