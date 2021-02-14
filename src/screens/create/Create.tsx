@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
-import { Formik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { ScrollView, View } from 'react-native';
 import { Header, Input, Button, CheckBox } from 'react-native-elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import * as Yup from 'yup';
 
 import { RootNavigatorParamList } from 'navigations/RootNavigator';
 import DateTimePicker from 'components/DatePicker';
@@ -17,6 +18,17 @@ type TCreateScreenNavigation = DrawerNavigationProp<
 type TCreateScreen = {
   navigation: TCreateScreenNavigation;
 };
+
+interface IFormValues {
+  name: string;
+  description: string;
+  private: boolean;
+}
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Title is required'),
+  description: Yup.string().required('Description is required'),
+});
 
 export default ({ navigation }: TCreateScreen) => {
   const handleFormSubmit = useCallback(() => {
@@ -38,27 +50,35 @@ export default ({ navigation }: TCreateScreen) => {
         }}
       />
       <Formik
-        initialValues={{ title: '', description: '', private: false }}
+        initialValues={{ name: '', description: '', private: false }}
+        validationSchema={validationSchema}
         onSubmit={handleFormSubmit}>
         {({
           values,
+          touched,
+          errors,
+          isValid,
           handleChange,
+          setFieldTouched,
           setFieldValue,
-          handleBlur,
           handleSubmit,
-        }) => (
+        }: FormikProps<IFormValues>) => (
           <ScrollView style={styles.container}>
             <Input
               label="Name"
-              onChange={handleChange('title')}
-              onBlur={handleBlur('title')}
-              value={values.title}
+              value={values.name}
+              onChangeText={(value) => setFieldValue('name', value)}
+              onBlur={() => setFieldTouched('name')}
+              onChange={handleChange('name')}
+              errorMessage={(touched.name && errors?.name) || ''}
             />
             <Input
-              label="Description"
-              onChange={handleChange('description')}
-              onBlur={handleBlur('description')}
+              label="description"
               value={values.description}
+              onChangeText={(value) => setFieldValue('description', value)}
+              onBlur={() => setFieldTouched('description')}
+              onChange={handleChange('description')}
+              errorMessage={(touched.description && errors?.description) || ''}
             />
             <View style={styles.dateTimeContainer}>
               <DateTimePicker
@@ -80,6 +100,7 @@ export default ({ navigation }: TCreateScreen) => {
             />
             <Button
               title="Create"
+              disabled={!isValid}
               buttonStyle={styles.submit}
               onPress={handleSubmit}
             />
