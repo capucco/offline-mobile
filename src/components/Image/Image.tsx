@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { ActivityIndicator, ImageStyle, StyleProp } from 'react-native';
+import { ActivityIndicator, StyleProp, ViewStyle } from 'react-native';
 import { Image } from 'react-native-elements';
 
 type TImage = {
   src: string;
-  style: StyleProp<ImageStyle>;
+  style: StyleProp<ViewStyle>;
 };
 
 export default ({ src, style }: TImage) => {
@@ -17,7 +17,7 @@ export default ({ src, style }: TImage) => {
   return (
     <Image
       source={imageSrc}
-      style={style}
+      containerStyle={style as any}
       onError={handleImageError}
       PlaceholderContent={<ActivityIndicator />}
     />

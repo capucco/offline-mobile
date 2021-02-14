@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { Formik } from 'formik';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Header, Input, Button, CheckBox } from 'react-native-elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 import { RootNavigatorParamList } from 'navigations/RootNavigator';
-import Calendar from 'components/Calendar';
+import DateTimePicker from 'components/DatePicker';
 
 import styles from './styles';
 
@@ -60,7 +60,16 @@ export default ({ navigation }: TCreateScreen) => {
               onBlur={handleBlur('description')}
               value={values.description}
             />
-            <Calendar />
+            <View style={styles.dateTimeContainer}>
+              <DateTimePicker
+                inputProps={{ label: 'Date', containerStyle: styles.dateInput }}
+                pickerProps={{ mode: 'date' }}
+              />
+              <DateTimePicker
+                inputProps={{ label: 'Time', containerStyle: styles.timeInput }}
+                pickerProps={{ mode: 'time' }}
+              />
+            </View>
             <CheckBox
               title="Private"
               size={30}

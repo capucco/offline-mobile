@@ -4,6 +4,17 @@ export default StyleSheet.create({
   container: {
     marginTop: 20,
   },
+  dateTimeContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dateInput: {
+    width: '50%',
+  },
+  timeInput: {
+    width: '50%',
+  },
   checkbox: {
     backgroundColor: 'transparent',
     borderColor: 'transparent',
