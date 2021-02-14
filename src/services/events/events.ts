@@ -48,4 +48,31 @@ export const MOCK_EVENTS_DATA: IEvent[] = [
     },
     date: '',
   },
+  {
+    id: '5',
+    title: 'Workout',
+    image: 'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg',
+    place: {
+      name: 'Florida, Miami',
+    },
+    date: '',
+  },
+  {
+    id: '6',
+    title: 'Workoutttttttttttt  dfs fds sdf sdf st t tt tt t tt t',
+    image: 'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg',
+    place: {
+      name: 'Florida, Miami, Florida, Miami, Florida, Miami, Florida, Miami',
+    },
+    date: '',
+  },
+  {
+    id: '7',
+    title: 'Workout',
+    image: 'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg',
+    place: {
+      name: 'Florida, Miami',
+    },
+    date: '',
+  },
 ];

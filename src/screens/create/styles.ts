@@ -14,6 +14,7 @@ export default StyleSheet.create({
   },
   submit: {
     marginTop: 40,
+    marginBottom: 20,
     backgroundColor: '#aedd94',
   },
 });

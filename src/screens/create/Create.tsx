@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Formik } from 'formik';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Header, Input, Button, CheckBox } from 'react-native-elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 
@@ -47,7 +47,7 @@ export default ({ navigation }: TCreateScreen) => {
           handleBlur,
           handleSubmit,
         }) => (
-          <View style={styles.container}>
+          <ScrollView style={styles.container}>
             <Input
               label="Name"
               onChange={handleChange('title')}
@@ -74,7 +74,7 @@ export default ({ navigation }: TCreateScreen) => {
               buttonStyle={styles.submit}
               onPress={handleSubmit}
             />
-          </View>
+          </ScrollView>
         )}
       </Formik>
     </>
