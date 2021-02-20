@@ -4,10 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CreateScreen from 'screens/create';
 import EventScreen from 'screens/event';
 import EventsScreen from 'screens/events';
+import { IEvent } from 'services/events/events';
 
 export type StackNavigatorParamList = {
   Create: undefined;
-  Event: undefined;
+  Event: IEvent;
   Events: undefined;
 };
 
