@@ -40,9 +40,9 @@ export default ({ navigation }: TCreateScreen) => {
     <>
       <Header
         leftComponent={{
-          icon: 'arrow-back',
+          icon: 'menu',
           color: '#fff',
-          onPress: () => navigation.goBack(),
+          onPress: () => navigation.openDrawer(),
         }}
         centerComponent={{
           text: 'Create new event',
