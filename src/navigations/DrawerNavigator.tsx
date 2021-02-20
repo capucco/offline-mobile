@@ -11,7 +11,6 @@ import { CreateStackNavigator, EventsStackNavigator } from './StackNavigator';
 
 export type DrawerNavigatorParamList = {
   Create: undefined;
-  Event: undefined;
   Events: undefined;
 };
 

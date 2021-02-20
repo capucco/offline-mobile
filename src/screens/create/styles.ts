@@ -23,9 +23,11 @@ export default StyleSheet.create({
   checkboxText: {
     fontSize: 16,
   },
-  submit: {
+  submitContainer: {
     marginTop: 40,
     marginBottom: 20,
+  },
+  submit: {
     backgroundColor: '#aedd94',
   },
 });

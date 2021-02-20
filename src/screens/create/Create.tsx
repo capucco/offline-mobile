@@ -3,6 +3,8 @@ import { Formik, FormikProps } from 'formik';
 import { ScrollView, View } from 'react-native';
 import { Header, Input, Button, CheckBox } from 'react-native-elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 
 import { DrawerNavigatorParamList } from 'navigations/DrawerNavigator';
@@ -31,10 +33,12 @@ const validationSchema = Yup.object().shape({
 });
 
 export default ({ navigation }: TCreateScreen) => {
+  const stackNavigation = useNavigation<StackNavigationProp<any>>();
+
   const handleFormSubmit = useCallback(() => {
     // TODO: use service to send data
-    navigation.navigate('Event');
-  }, [navigation]);
+    stackNavigation.navigate('Event');
+  }, [stackNavigation]);
 
   return (
     <>
@@ -50,6 +54,7 @@ export default ({ navigation }: TCreateScreen) => {
         }}
       />
       <Formik
+        validateOnMount
         initialValues={{ name: '', description: '', private: false }}
         validationSchema={validationSchema}
         onSubmit={handleFormSubmit}>
@@ -98,12 +103,14 @@ export default ({ navigation }: TCreateScreen) => {
               checked={values.private}
               onPress={() => setFieldValue('private', !values.private)}
             />
-            <Button
-              title="Create"
-              disabled={!isValid}
-              buttonStyle={styles.submit}
-              onPress={handleSubmit}
-            />
+            <View style={styles.submitContainer}>
+              <Button
+                title="Create"
+                disabled={!isValid}
+                buttonStyle={styles.submit}
+                onPress={handleSubmit}
+              />
+            </View>
           </ScrollView>
         )}
       </Formik>
