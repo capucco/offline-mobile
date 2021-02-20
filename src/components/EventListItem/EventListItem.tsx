@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { View } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useNavigation } from '@react-navigation/native';
@@ -19,12 +20,13 @@ type TEventListItem = {
   date: string;
 };
 
-export default ({ image, title, place, date }: TEventListItem) => {
-  const navigation = useNavigation();
+export default (data: TEventListItem) => {
+  const navigation = useNavigation<StackNavigationProp<any>>();
+  const { image, title, place, date } = data;
 
   const handleItemPress = useCallback(() => {
-    navigation.navigate('Event');
-  }, [navigation]);
+    navigation.push('Event', data);
+  }, [data, navigation]);
 
   return (
     <ListItem onPress={handleItemPress} containerStyle={styles.container}>

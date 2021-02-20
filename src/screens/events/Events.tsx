@@ -3,12 +3,12 @@ import { FlatList } from 'react-native';
 import { Header } from 'react-native-elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 
-import { RootNavigatorParamList } from 'navigations/RootNavigator';
+import { DrawerNavigatorParamList } from 'navigations/DrawerNavigator';
 import EventListItem from 'components/EventListItem';
 import { IEvent, MOCK_EVENTS_DATA } from 'services/events/events';
 
 type TEventsScreenNavigation = DrawerNavigationProp<
-  RootNavigatorParamList,
+  DrawerNavigatorParamList,
   'Events'
 >;
 

@@ -5,13 +5,13 @@ import { Header, Input, Button, CheckBox } from 'react-native-elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import * as Yup from 'yup';
 
-import { RootNavigatorParamList } from 'navigations/RootNavigator';
+import { DrawerNavigatorParamList } from 'navigations/DrawerNavigator';
 import DateTimePicker from 'components/DatePicker';
 
 import styles from './styles';
 
 type TCreateScreenNavigation = DrawerNavigationProp<
-  RootNavigatorParamList,
+  DrawerNavigatorParamList,
   'Create'
 >;
 
@@ -40,9 +40,9 @@ export default ({ navigation }: TCreateScreen) => {
     <>
       <Header
         leftComponent={{
-          icon: 'menu',
+          icon: 'arrow-back',
           color: '#fff',
-          onPress: () => navigation.openDrawer(),
+          onPress: () => navigation.goBack(),
         }}
         centerComponent={{
           text: 'Create new event',

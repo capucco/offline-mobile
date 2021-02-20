@@ -1,18 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Header } from 'react-native-elements';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+import { DrawerNavigatorParamList } from 'navigations/DrawerNavigator';
 
-export default () => {
+type TEventScreenNavigation = DrawerNavigationProp<
+  DrawerNavigatorParamList,
+  'Event'
+>;
+
+type TEventScreen = {
+  navigation: TEventScreenNavigation;
+  route: any;
+};
+
+export default ({ navigation, route }: TEventScreen) => {
+  const { title } = route.params;
+
   return (
-    <View style={styles.root}>
-      <Text>Event</Text>
-    </View>
+    <>
+      <Header
+        leftComponent={{
+          icon: 'arrow-back',
+          color: '#fff',
+          onPress: () => navigation.goBack(),
+        }}
+        centerComponent={{
+          text: title,
+          style: { color: '#fff', fontSize: 17 },
+        }}
+        rightComponent={{
+          icon: 'share',
+          color: '#fff',
+        }}
+      />
+    </>
   );
 };
