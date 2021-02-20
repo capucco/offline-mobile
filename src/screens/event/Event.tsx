@@ -15,7 +15,7 @@ type TEventScreenNavigation = StackNavigationProp<
 type TEventScreen = {
   navigation: TEventScreenNavigation;
   route: Route<'Event'> & {
-    params: IEvent | null;
+    params?: IEvent;
   };
 };
 

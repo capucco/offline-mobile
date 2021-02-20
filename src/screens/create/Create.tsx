@@ -2,18 +2,16 @@ import React, { useCallback } from 'react';
 import { Formik, FormikProps } from 'formik';
 import { ScrollView, View } from 'react-native';
 import { Header, Input, Button, CheckBox } from 'react-native-elements';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 
-import { DrawerNavigatorParamList } from 'navigations/DrawerNavigator';
+import { StackNavigatorParamList } from 'navigations/StackNavigator';
 import DateTimePicker from 'components/DatePicker';
 
 import styles from './styles';
 
-type TCreateScreenNavigation = DrawerNavigationProp<
-  DrawerNavigatorParamList,
+type TCreateScreenNavigation = StackNavigationProp<
+  StackNavigatorParamList,
   'Create'
 >;
 
@@ -33,21 +31,14 @@ const validationSchema = Yup.object().shape({
 });
 
 export default ({ navigation }: TCreateScreen) => {
-  const stackNavigation = useNavigation<StackNavigationProp<any>>();
-
   const handleFormSubmit = useCallback(() => {
     // TODO: use service to send data
-    stackNavigation.navigate('Event');
-  }, [stackNavigation]);
+    navigation.navigate('Event');
+  }, [navigation]);
 
   return (
     <>
       <Header
-        leftComponent={{
-          icon: 'menu',
-          color: '#fff',
-          onPress: () => navigation.openDrawer(),
-        }}
         centerComponent={{
           text: 'Create new event',
           style: { color: '#fff', fontSize: 17 },
@@ -78,7 +69,7 @@ export default ({ navigation }: TCreateScreen) => {
               errorMessage={(touched.name && errors?.name) || ''}
             />
             <Input
-              label="description"
+              label="Description"
               value={values.description}
               onChangeText={(value) => setFieldValue('description', value)}
               onBlur={() => setFieldTouched('description')}
