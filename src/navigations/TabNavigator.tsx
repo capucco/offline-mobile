@@ -39,7 +39,25 @@ const CreateTabNavigator = () => (
 );
 
 const EventsTabNavigator = () => (
-  <Tab.Navigator initialRouteName="Events">
+  <Tab.Navigator
+    initialRouteName="Events"
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName = '';
+
+        if (route.name === 'Create') {
+          iconName = focused ? 'add' : 'add';
+        } else if (route.name === 'Events') {
+          iconName = focused ? 'place' : 'place';
+        }
+
+        return <Icon name={iconName} size={size} color={color} />;
+      },
+    })}
+    tabBarOptions={{
+      activeTintColor: '#3381ff',
+      inactiveTintColor: '#35424a',
+    }}>
     <Tab.Screen name="Create" component={CreateScreen} />
     <Tab.Screen name="Events" component={EventsScreen} />
   </Tab.Navigator>

@@ -6,7 +6,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import * as Yup from 'yup';
 
 import { StackNavigatorParamList } from 'navigations/StackNavigator';
-import DateTimePicker from 'components/DatePicker';
+import DateTimePicker from 'components/DateTimePicker';
 
 import styles from './styles';
 
