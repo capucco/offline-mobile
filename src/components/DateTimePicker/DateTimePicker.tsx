@@ -1,18 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import DateTimePicker, {
-  AndroidNativeProps,
-  IOSNativeProps,
-  WindowsNativeProps,
-} from '@react-native-community/datetimepicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Input, InputProps } from 'react-native-elements';
 
 type TDateTimePicker = {
   inputProps?: InputProps;
-  pickerProps: (
-    | Omit<IOSNativeProps, 'value'>
-    | Omit<AndroidNativeProps, 'value'>
-    | Omit<WindowsNativeProps, 'value'>
-  ) & { mode: string };
+  pickerProps: any;
 };
 
 export default ({ inputProps, pickerProps }: TDateTimePicker) => {
@@ -23,11 +15,12 @@ export default ({ inputProps, pickerProps }: TDateTimePicker) => {
   const onChange = useCallback((_event: Event, date?: Date) => {
     if (date) {
       setValue(date);
-      setShow(false);
     }
+
+    setShow(false);
   }, []);
 
-  const onTextPress = useCallback(() => {
+  const onInputFocus = useCallback(() => {
     setShow(true);
   }, []);
 
@@ -40,15 +33,21 @@ export default ({ inputProps, pickerProps }: TDateTimePicker) => {
 
   return (
     <>
-      <Input {...inputProps} onFocus={onTextPress} value={inputValue} />
-      {show && (
-        <DateTimePicker
-          {...pickerProps}
-          minimumDate={minimumDate}
-          value={value}
-          onChange={onChange}
-        />
-      )}
+      <Input
+        {...inputProps}
+        disabled
+        onFocus={onInputFocus}
+        value={inputValue}
+      />
+      <DateTimePickerModal
+        {...pickerProps}
+        isVisible={show}
+        display="spinner"
+        minimumDate={minimumDate}
+        onChange={onChange}
+        onConfirm={onChange}
+        onCancel={onChange}
+      />
     </>
   );
 };
