@@ -1,18 +1,28 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Input, InputProps } from 'react-native-elements';
+import {
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
+import dayjs from 'dayjs';
+
+import styles from './styles';
 
 type TDateTimePicker = {
-  inputProps?: InputProps;
+  label?: string;
+  containerStyle?: StyleProp<ViewStyle>;
   pickerProps: any;
 };
 
-export default ({ inputProps, pickerProps }: TDateTimePicker) => {
+export default ({ label, pickerProps, containerStyle }: TDateTimePicker) => {
   const { mode } = pickerProps;
   const [value, setValue] = useState<Date>(new Date());
   const [show, setShow] = useState<boolean>(false);
 
-  const onChange = useCallback((_event: Event, date?: Date) => {
+  const onChange = useCallback((date: Date) => {
     if (date) {
       setValue(date);
     }
@@ -20,31 +30,27 @@ export default ({ inputProps, pickerProps }: TDateTimePicker) => {
     setShow(false);
   }, []);
 
-  const onInputFocus = useCallback(() => {
+  const onInputPress = useCallback(() => {
     setShow(true);
   }, []);
 
-  const minimumDate: Date = useMemo(() => new Date(), []);
-
   const inputValue: string = useMemo(
-    () => (mode === 'date' ? value.toDateString() : value.toTimeString()),
+    () => dayjs(value).format(mode === 'date' ? 'DD.MM.YYYY' : 'hh:mm'),
     [mode, value],
   );
 
   return (
     <>
-      <Input
-        {...inputProps}
-        disabled
-        onFocus={onInputFocus}
-        value={inputValue}
-      />
+      <View style={[styles.container, containerStyle]}>
+        {label ? <Text style={styles.label}>{label}:</Text> : null}
+        <TouchableOpacity onPress={onInputPress}>
+          <Text style={styles.value}>{inputValue}</Text>
+        </TouchableOpacity>
+      </View>
       <DateTimePickerModal
         {...pickerProps}
         isVisible={show}
         display="spinner"
-        minimumDate={minimumDate}
-        onChange={onChange}
         onConfirm={onChange}
         onCancel={onChange}
       />

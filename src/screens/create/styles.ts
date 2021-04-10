@@ -9,10 +9,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  dateInput: {
+  dateContainer: {
     width: '50%',
   },
-  timeInput: {
+  timeContainer: {
     width: '50%',
   },
   checkbox: {

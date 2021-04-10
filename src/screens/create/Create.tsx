@@ -31,10 +31,16 @@ const validationSchema = Yup.object().shape({
 });
 
 export default ({ navigation }: TCreateScreen) => {
-  const handleFormSubmit = useCallback(() => {
-    // TODO: use service to send data
-    navigation.navigate('Event');
-  }, [navigation]);
+  const handleFormSubmit = useCallback(
+    (values, { resetForm }) => {
+      // TODO: use service to send data
+      // eslint-disable-next-line no-console
+      console.log(values);
+      navigation.navigate('Event');
+      resetForm();
+    },
+    [navigation],
+  );
 
   return (
     <>
@@ -54,7 +60,6 @@ export default ({ navigation }: TCreateScreen) => {
           touched,
           errors,
           isValid,
-          handleChange,
           setFieldTouched,
           setFieldValue,
           handleSubmit,
@@ -65,7 +70,6 @@ export default ({ navigation }: TCreateScreen) => {
               value={values.name}
               onChangeText={(value) => setFieldValue('name', value)}
               onBlur={() => setFieldTouched('name')}
-              onChange={handleChange('name')}
               errorMessage={(touched.name && errors?.name) || ''}
             />
             <Input
@@ -73,16 +77,17 @@ export default ({ navigation }: TCreateScreen) => {
               value={values.description}
               onChangeText={(value) => setFieldValue('description', value)}
               onBlur={() => setFieldTouched('description')}
-              onChange={handleChange('description')}
               errorMessage={(touched.description && errors?.description) || ''}
             />
             <View style={styles.dateTimeContainer}>
               <DateTimePicker
-                inputProps={{ label: 'Date', containerStyle: styles.dateInput }}
+                label="Date"
+                containerStyle={styles.dateContainer}
                 pickerProps={{ mode: 'date' }}
               />
               <DateTimePicker
-                inputProps={{ label: 'Time', containerStyle: styles.timeInput }}
+                label="Time"
+                containerStyle={styles.timeContainer}
                 pickerProps={{ mode: 'time' }}
               />
             </View>
