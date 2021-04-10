@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 
 import { StackNavigatorParamList } from 'navigations/StackNavigator';
 import DateTimePicker from 'components/DateTimePicker';
+import ImagePicker from 'components/ImagePicker';
 
 import styles from './styles';
 
@@ -99,6 +100,7 @@ export default ({ navigation }: TCreateScreen) => {
               checked={values.private}
               onPress={() => setFieldValue('private', !values.private)}
             />
+            <ImagePicker />
             <View style={styles.submitContainer}>
               <Button
                 title="Create"
