@@ -47,4 +47,23 @@ export default StyleSheet.create({
     fontSize: 16,
     color: '#000000',
   },
+  caption: {
+    marginTop: 15,
+    marginBottom: 15,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'grey',
+  },
+  person: {
+    backgroundColor: 'transparent',
+  },
+  personName: {
+    fontSize: 16,
+  },
+  personDescription: {
+    marginTop: 10,
+    paddingRight: 12,
+    fontSize: 14,
+    opacity: 0.7,
+  },
 });

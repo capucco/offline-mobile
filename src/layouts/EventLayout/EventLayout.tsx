@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Button, Icon, Text } from 'react-native-elements';
+import { Avatar, Button, Icon, ListItem, Text } from 'react-native-elements';
 import dayjs from 'dayjs';
 
 import Image from 'components/Image';
-import { IPlace } from 'services/events/events';
+import { IPlace, TPerson } from 'services/events/events';
 
 import styles from './styles';
 
@@ -13,9 +13,18 @@ type TEventLayout = {
   place: IPlace;
   image: string;
   date: string;
+  organizer: TPerson;
+  invited?: TPerson[];
 };
 
-export default ({ image, place, date, description }: TEventLayout) => {
+export default ({
+  image,
+  place,
+  date,
+  description,
+  organizer,
+  invited,
+}: TEventLayout) => {
   const handleGo = useCallback(() => {
     // go
   }, []);
@@ -52,6 +61,36 @@ export default ({ image, place, date, description }: TEventLayout) => {
           </View>
         </View>
         <Text style={styles.description}>{description}</Text>
+        <Text style={styles.caption}>Organizer:</Text>
+        <ListItem containerStyle={styles.person}>
+          <Avatar source={{ uri: organizer.photo }} size="large" rounded />
+          <ListItem.Content>
+            <ListItem.Title style={styles.personName}>
+              {organizer.name}
+            </ListItem.Title>
+            <ListItem.Subtitle style={styles.personDescription}>
+              {organizer.description}
+            </ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+        {invited ? (
+          <>
+            <Text style={styles.caption}>Attendees:</Text>
+            {invited.map((person: TPerson) => (
+              <ListItem key={person.id} containerStyle={styles.person}>
+                <Avatar source={{ uri: person.photo }} size="large" rounded />
+                <ListItem.Content>
+                  <ListItem.Title style={styles.personName}>
+                    {person.name}
+                  </ListItem.Title>
+                  <ListItem.Subtitle style={styles.personDescription}>
+                    {person.description}
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+            ))}
+          </>
+        ) : null}
       </View>
     </ScrollView>
   );

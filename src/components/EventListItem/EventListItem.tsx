@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Icon, ListItem, Text } from 'react-native-elements';
 
 import Image from 'components/Image';
-import { IPlace } from 'services/events/events';
+import { IPlace, TPerson } from 'services/events/events';
 
 import styles from './styles';
 
@@ -18,6 +18,7 @@ type TEventListItem = {
   title: string;
   place: IPlace;
   date: string;
+  organizer: TPerson;
 };
 
 export default (data: TEventListItem) => {
