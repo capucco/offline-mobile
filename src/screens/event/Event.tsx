@@ -1,4 +1,5 @@
 import React from 'react';
+import { Share } from 'react-native';
 import { Header } from 'react-native-elements';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Route } from '@react-navigation/native';
@@ -20,6 +21,16 @@ type TEventScreen = {
 };
 
 export default ({ navigation, route }: TEventScreen) => {
+  const handleShare = async () => {
+    try {
+      await Share.share({
+        message: `Hello, check out this ${route.params?.title}, would you like to go? https://www.offline-app.com/event/${route.params?.id}`,
+      });
+    } catch (error) {
+      // error
+    }
+  };
+
   return (
     <>
       <Header
@@ -35,6 +46,7 @@ export default ({ navigation, route }: TEventScreen) => {
         rightComponent={{
           icon: 'share',
           color: '#fff',
+          onPress: handleShare,
         }}
       />
       {route.params ? <EventLayout {...route.params} /> : null}
